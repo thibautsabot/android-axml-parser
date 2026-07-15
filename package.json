@@ -1,5 +1,5 @@
 {
-  "name": "axml-parser",
+  "name": "android-axml-parser",
   "version": "0.1.0",
   "description": "Android binary XML (AXML) parser for Node.js. Parses the binary format used in APK manifests and returns a typed element tree with the full string pool.",
   "type": "module",

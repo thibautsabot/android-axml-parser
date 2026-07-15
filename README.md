@@ -7,7 +7,7 @@ When you build an Android APK, every XML file — the manifest, layouts, resourc
 ## Install
 
 ```sh
-npm install axml-parser
+npm install android-axml-parser
 ```
 
 Requires Node.js ≥ 20.
@@ -15,11 +15,9 @@ Requires Node.js ≥ 20.
 ## Usage
 
 ```ts
-import { parseAxml } from "axml-parser";
-import { readFileSync } from "node:fs";
+import { parseAxml } from "android-axml-parser";
 
-// Read the binary AndroidManifest.xml directly out of an unzipped APK
-const buffer = readFileSync("AndroidManifest.xml");
+// buffer is the raw bytes of a binary AXML file
 const doc = parseAxml(buffer);
 
 console.log(doc.root?.name); // "manifest"
@@ -68,30 +66,6 @@ Attribute values are decoded from their typed representation:
 | Float | `"3.14"` |
 | Resource reference | `"@0x7f040001"` |
 | Theme attribute | `"?0x01010001"` |
-
-## Common use case: APK manifest
-
-```ts
-import { parseAxml } from "axml-parser";
-import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-
-// Extract AndroidManifest.xml from an APK (requires unzip)
-execSync("unzip -o app.apk AndroidManifest.xml -d /tmp/apk");
-const buffer = readFileSync("/tmp/apk/AndroidManifest.xml");
-
-const doc = parseAxml(buffer);
-const manifest = doc.root;
-
-const packageAttr = manifest?.attributes.find((a) => a.name === "package");
-console.log("Package:", packageAttr?.value);
-
-const permissions = manifest?.children
-  .filter((el) => el.name === "uses-permission")
-  .map((el) => el.attributes.find((a) => a.name === "name")?.value);
-
-console.log("Permissions:", permissions);
-```
 
 ## License
 
