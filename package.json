@@ -1,0 +1,34 @@
+{
+  "name": "axml-parser",
+  "version": "0.1.0",
+  "description": "Android binary XML (AXML) parser for Node.js. Parses the binary format used in APK manifests and returns a typed element tree with the full string pool.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "android",
+    "axml",
+    "apk",
+    "binary-xml",
+    "manifest"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
+  }
+}
